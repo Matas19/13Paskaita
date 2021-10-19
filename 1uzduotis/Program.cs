@@ -10,6 +10,8 @@ namespace _1uzduotis
     {
         static void Main(string[] args)
         {
+
+            Console.ReadKey();
         }
     }
 }
