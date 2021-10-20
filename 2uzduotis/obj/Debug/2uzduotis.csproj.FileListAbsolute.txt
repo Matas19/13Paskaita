@@ -1,0 +1,7 @@
+C:\Users\Matas\source\repos\13Paskaita\2uzduotis\bin\Debug\2uzduotis.exe.config
+C:\Users\Matas\source\repos\13Paskaita\2uzduotis\bin\Debug\2uzduotis.exe
+C:\Users\Matas\source\repos\13Paskaita\2uzduotis\bin\Debug\2uzduotis.pdb
+C:\Users\Matas\source\repos\13Paskaita\2uzduotis\obj\Debug\2uzduotis.csproj.AssemblyReference.cache
+C:\Users\Matas\source\repos\13Paskaita\2uzduotis\obj\Debug\2uzduotis.csproj.CoreCompileInputs.cache
+C:\Users\Matas\source\repos\13Paskaita\2uzduotis\obj\Debug\2uzduotis.exe
+C:\Users\Matas\source\repos\13Paskaita\2uzduotis\obj\Debug\2uzduotis.pdb
