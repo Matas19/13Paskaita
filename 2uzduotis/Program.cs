@@ -26,7 +26,7 @@ namespace _2uzduotis
             {
                 try
                 {
-                    Console.WriteLine("Iveskite skaiciu");
+                    Console.WriteLine("Iveskite skaiciu:");
                     sk = Convert.ToDouble(Console.ReadLine());
                     if(sk<0)                   //jei skaicius yra neigiamas, sukuria iskviecia nauja exception'a, kuris neleidzia ivesti skaiciaus i lista
                     {

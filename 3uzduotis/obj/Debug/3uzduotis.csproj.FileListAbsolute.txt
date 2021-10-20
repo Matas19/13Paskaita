@@ -1,0 +1,6 @@
+C:\Users\Matas\source\repos\13Paskaita\3uzduotis\bin\Debug\3uzduotis.exe.config
+C:\Users\Matas\source\repos\13Paskaita\3uzduotis\bin\Debug\3uzduotis.exe
+C:\Users\Matas\source\repos\13Paskaita\3uzduotis\bin\Debug\3uzduotis.pdb
+C:\Users\Matas\source\repos\13Paskaita\3uzduotis\obj\Debug\3uzduotis.csproj.CoreCompileInputs.cache
+C:\Users\Matas\source\repos\13Paskaita\3uzduotis\obj\Debug\3uzduotis.exe
+C:\Users\Matas\source\repos\13Paskaita\3uzduotis\obj\Debug\3uzduotis.pdb
