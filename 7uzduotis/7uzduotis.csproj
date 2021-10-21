@@ -47,7 +47,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Svetaine.cs" />
     <Compile Include="UserDatabase.cs" />
-    <Compile Include="Vartotojas.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

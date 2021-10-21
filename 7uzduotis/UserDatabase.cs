@@ -9,42 +9,66 @@ namespace _7uzduotis
 {
     class UserDatabase
     {
-        public List<Vartotojas> Vartotojai { get; private set; }
         private readonly string _path = "../../vartotojai.txt";
 
         public UserDatabase()
         {
-            Vartotojai = new List<Vartotojas>();
-            Vartotojai.Add(new Vartotojas("pirmas", "123456"));
-            Vartotojai.Add(new Vartotojas("antras", "password"));
+
             File.WriteAllText(_path, "pirmas 123456\nantras password\n");
 
         }
 
-        //metodas tikrina ar egzistuoja vartotojas, jei egzistuoja, grazina jo index'a vartotoju liste, jei ne grazina -1
-        public int ArEgzistuoja(string name)    
+        public bool ArEgzistuojaFaile(string name)
         {
-            foreach(Vartotojas user in Vartotojai)
+            string eilute = "";
+            using(StreamReader sr = File.OpenText(_path))
             {
-                if(user.GautiUsername() == name)
+                
+                while (eilute != null)  //sukasi kol nuskaityta eilute bus failo pabaiga
                 {
-                    return Vartotojai.IndexOf(user);
+                    eilute = sr.ReadLine();
+                    if (eilute != null)         //tikrina ar nuskaityta eilute nera paskutine
+                    {
+                        string[] duomenys = eilute.Split(' ');  //sukapoja string eilute i atskirus zodzius
+                        if (duomenys[0] == name)
+                        {
+                            return true;
+                        }
+                    }
                 }
             }
-            
-            return -1;
+
+            return false;
         }
 
-        public bool TikrintiPassword(string pasw , int index)
-        {
-            return Vartotojai[index].TikrintiPassword(pasw);
 
-            
+
+        public bool TikrintiPasswordFaile(string name, string pasw)
+        {
+            string eilute = "";
+            using (StreamReader sr = File.OpenText(_path))
+            {
+
+                while (eilute != null)  //sukasi kol nenuskaito failo pabaigos
+                {
+                    eilute = sr.ReadLine();
+                    if (eilute != null)         //tikrina ar nuskaityta eilute nera paskutine
+                    {
+                        string[] duomenys = eilute.Split(' ');  //sukapoja string eilute i atskirus zodzius
+                        if (duomenys[0] == name && duomenys[1] == pasw)     //patikrina ar username ir paswordas sutampa
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
         }
 
         public void PridetiVartotoja(string name, string pasw)
         {
-            Vartotojai.Add(new Vartotojas(name, pasw));
+            
             using(StreamWriter sw = File.AppendText(_path))
             {
                 sw.WriteLine($"{name} {pasw}");

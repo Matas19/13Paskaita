@@ -44,11 +44,7 @@ namespace _7uzduotis
                 {
                     Console.WriteLine("Blogas pasirinkimas!!! Kartokite");
                 }
-            }
-
-            foreach(Vartotojas user in Duombaze.Vartotojai)
-            {
-                Console.WriteLine(user.GautiUsername());
+                Console.WriteLine();
             }
         }
 
@@ -64,18 +60,19 @@ namespace _7uzduotis
                 Console.Write("Iveskite savo password: ");
                 password = Console.ReadLine();
 
-                int userIndex = Duombaze.ArEgzistuoja(username);    //jei userIndex -1, vadinasi tokio vartotojo nera
+                
+                bool egzistuoja = Duombaze.ArEgzistuojaFaile(username);
                 bool prisijungta;
 
             
-                if(userIndex < 0)       //tikrina ar egzistuoja vartotojas su pasirinktu username
+                if(!egzistuoja)       //tikrina ar egzistuoja vartotojas su pasirinktu username
                 {
                     Console.WriteLine("Vartotojo su tokiu username nera");
                     kartoti = Kartoti();                //paklausia vartotojo ar jis nori kartoti prisijungima
                 }
                 else            //jei egzistuoja, patikrina ar atitinka slaptazodziai
                 {
-                    prisijungta = Duombaze.TikrintiPassword(password, userIndex);
+                    prisijungta = Duombaze.TikrintiPasswordFaile(username, password);
                     if (prisijungta == true)
                     {
                         Console.WriteLine("Sekmingai prisijungete!!!");
@@ -105,12 +102,12 @@ namespace _7uzduotis
                 Console.Write("Iveskite nauja password: ");
                 password = Console.ReadLine();
 
-                int userIndex = Duombaze.ArEgzistuoja(username);    //jei userIndex -1, vadinasi tokio vartotojo nera
+                bool egzistuoja = Duombaze.ArEgzistuojaFaile(username);    //jei userIndex -1, vadinasi tokio vartotojo nera
                 
                 
 
 
-                if (userIndex < 0)       //tikrina ar neegzistuoja vartotojas su pasirinktu username
+                if (!egzistuoja)       //tikrina ar neegzistuoja vartotojas su pasirinktu username
                 {
                     Duombaze.PridetiVartotoja(username, password);
                     Console.WriteLine("Sekmingai uzsiregistravote");
