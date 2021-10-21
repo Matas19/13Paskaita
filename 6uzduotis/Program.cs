@@ -14,7 +14,10 @@ namespace _6uzduotis
 
             Veiksmai.TikrintiFaila(path);
 
-            Console.ReadLine();
+            string test = "testinis tekstas";
+            Veiksmai.Ivesti(path, test);
+
+            Console.ReadKey();
         }
     }
 }

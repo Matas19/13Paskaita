@@ -12,7 +12,7 @@ namespace _6uzduotis
 
         public static string TikrintiFaila(string path)
         {
-            try
+            try                             //ivykus klaidai, gautas exceptionas bus issaugomas i faila
             {
                 if (File.Exists(path))
                 {
@@ -26,7 +26,7 @@ namespace _6uzduotis
             catch(Exception e)
             {
                 Console.WriteLine($"Ivyko klaida: {e.Message}");
-                using (StreamWriter sw = File.CreateText("../../error.txt"))
+                using (StreamWriter sw = File.AppendText("../../error.txt"))        //sukuria nauja faila arba atidaro streamWriteri kuris prides teksta prie jau egzistuojancio failo
                 {
                     sw.WriteLine($"ivyko klaida\n{e}");
                 }
@@ -36,8 +36,9 @@ namespace _6uzduotis
 
         public static void Ivesti(string path, string duomenys)
         {
-            try
+            try                       //ivykus klaidai, gautas exceptionas bus issaugomas i faila
             {
+                
                 using(StreamWriter sr = new StreamWriter(path))
                 {
                     sr.WriteLine(duomenys);
@@ -46,7 +47,7 @@ namespace _6uzduotis
             catch(Exception e)
             {
                 Console.WriteLine($"Ivyko klaida: {e.Message}");
-                using (StreamWriter sw = File.CreateText("../../error.txt"))
+                using (StreamWriter sw = File.AppendText("../../error.txt"))    //sukuria nauja faila arba atidaro streamWriteri kuris prides teksta prie jau egzistuojancio failo
                 {
                     sw.WriteLine($"ivyko klaida\n{e}");
                 }
