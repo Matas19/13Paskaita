@@ -1,9 +1,0 @@
-﻿Vardas1 Studentas1 3
-Vardas2 Studentas2 1
-Vardas3 Studentas3 2
-Vardas4 Studentas4 3
-Vardas5 Studentas5 2
-Vardas6 Studentas6 1
-Vardas7 Studentas7 3
-Vardas8 Studentas8 1
-Vardas9 Studentas9 3

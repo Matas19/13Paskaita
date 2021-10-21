@@ -14,6 +14,8 @@ namespace _8uzduotis
         private int _StudKiekis;
         private int _DestKiekis;
         public int _Kursai { get; private set; }
+        public List<string[]> studentai { get; private set; }
+        public List<string[]> destytojai { get; private set; }
 
         public Rusiuotojas(string stud, string dest)
         {
@@ -43,7 +45,13 @@ namespace _8uzduotis
             Console.WriteLine($"Kursu kiekis: {_Kursai}\nStudentu kiekis: {_StudKiekis}\nDestytoju kiekis: {_DestKiekis}");
         }
 
+        //private void KursuKiekisIrSkaiciai()   //suranda kiek yra kursu ir suskaiciuo studentus bei destytojus
+        //{
+        //    RastiKursaIrKieki(_DestPath, out _DestKiekis);
+        //    RastiKursaIrKieki(_StudPath, out _StudKiekis);
 
+
+        //}
         private void IsvestiPagalKursa(int kursas, string path)
         {
             string duomenys;
