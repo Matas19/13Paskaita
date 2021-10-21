@@ -1,0 +1,6 @@
+﻿PirmasD Destytojas1 3
+AntrasD Destytojas2 1
+TreciasD Destytojas3 2
+KetvirtasD Derstytojas4 1
+PenktasD Destytojas5 3
+SestasD Destytojas6 1
