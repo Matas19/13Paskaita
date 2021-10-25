@@ -8,37 +8,32 @@ namespace _4uzduotis
 {
     class WordDatabase
     {
-        private List<string> _Zodziai;
+        private List<string> _zodziai;
 
         public WordDatabase()
         {
-            _Zodziai = new List<string>();
+            _zodziai = new List<string>();
         }
 
-        public void Ivedimas()
+        public void Ivesti(string zodis)
         {
-            Console.WriteLine("Pradedamas ivedimas, pasikartojantys zodziai nebus issaugoti\nNorint baigti ivedima suvesti \"baigti\"");
-            string zodis = "";
-            while(zodis != "baigti")
+            _zodziai.Add(zodis);
+        }
+
+        public bool ArEgzistuoja(string zodis)
+        {
+            if (_zodziai.Contains(zodis))
             {
-                Console.WriteLine("Iveskite zodi:");
-                zodis = Console.ReadLine();
-                if (_Zodziai.Contains(zodis) && zodis != "baigti")
-                {
-                    Console.WriteLine($"Zodis \"{zodis}\" kartojasi ir nebus issaugotas");
-                }
-                else if(zodis != "baigti")
-                {
-                    _Zodziai.Add(zodis);
-                    Console.WriteLine($"\"{zodis}\" buvo issaugotas!");
-                }
+                return true;
             }
+
+            return false;
         }
         
         public void Isvedimas()
         {
             Console.WriteLine("Isaugoti zodziai:");
-            foreach(string zodis in _Zodziai)
+            foreach(string zodis in _zodziai)
             {
                 Console.WriteLine(zodis);
             }

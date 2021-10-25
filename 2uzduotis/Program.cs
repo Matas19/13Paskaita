@@ -12,13 +12,13 @@ namespace _2uzduotis
         {
             List<double> skaiciai = new List<double>();
 
-            SkaiciuIvedimas(skaiciai);
-            Isvedimas(skaiciai);
+            IvestiSkaicius(skaiciai);
+            Isvesti(skaiciai);
 
             Console.ReadKey();
         }
 
-        static void SkaiciuIvedimas(List<double> skaiciai)
+        static void IvestiSkaicius(List<double> skaiciai)
         {
             Console.WriteLine("Visi vedami skaiciai turi buti teigiami");
             double sk;
@@ -41,44 +41,28 @@ namespace _2uzduotis
             }
         }
 
-        static void Isvedimas(List<double> skaiciai)
+        static void Isvesti(List<double> skaiciai)
         {
             //suma
-            double suma = 0;
-            foreach(double sk in skaiciai)
-            {
-                suma += sk;
-            }
+            double suma = GautiSuma(skaiciai);
 
             //atimtis
-            double atimtis = 0;
-            foreach(double sk in skaiciai)
-            {
-                if (skaiciai.IndexOf(sk) == 0)      //jei tai yra pirmas paimtas skaicius, ji priskiriame atimties reiksmei, is kurios atimsime kitus skaicius
-                {
-                    atimtis = sk;
-                }
-                else
-                {
-                    atimtis -= sk;
-                }
-            }
+            double atimtis = GautiAtimti(skaiciai);
 
             //daugyba
-            double daugyba = 0;
-            foreach (double sk in skaiciai)
-            {
-                if (skaiciai.IndexOf(sk) == 0)      //jei tai yra pirmas paimtas skaicius, ji priskiriame daugybos reiksmei, kuria dauginsime is kitu
-                {
-                    daugyba = sk;
-                }
-                else
-                {
-                    daugyba *= sk;
-                }
-            }
+            double daugyba = Sudauginti(skaiciai);
 
             //dalyba
+            double dalyba = Padalinti(skaiciai);
+
+            //idvedimas i ekrana
+
+            Console.WriteLine($"Suma {suma}\nAtimtis {atimtis}\nDaugyba {daugyba}\nDalyba {dalyba}");
+
+        }
+
+        private static double Padalinti(List<double> skaiciai)
+        {
             double dalyba = 0;
             foreach (double sk in skaiciai)
             {
@@ -92,10 +76,54 @@ namespace _2uzduotis
                 }
             }
 
-            //idvedimas i ekrana
+            return dalyba;
+        }
 
-            Console.WriteLine($"Suma {suma}\nAtimtis {atimtis}\nDaugyba {daugyba}\nDalyba {dalyba}");
+        private static double Sudauginti(List<double> skaiciai)
+        {
+            double daugyba = 0;
+            foreach (double sk in skaiciai)
+            {
+                if (skaiciai.IndexOf(sk) == 0)      //jei tai yra pirmas paimtas skaicius, ji priskiriame daugybos reiksmei, kuria dauginsime is kitu
+                {
+                    daugyba = sk;
+                }
+                else
+                {
+                    daugyba *= sk;
+                }
+            }
 
+            return daugyba;
+        }
+
+        private static double GautiAtimti(List<double> skaiciai)
+        {
+            double atimtis = 0;
+            foreach (double sk in skaiciai)
+            {
+                if (skaiciai.IndexOf(sk) == 0)      //jei tai yra pirmas paimtas skaicius, ji priskiriame atimties reiksmei, is kurios atimsime kitus skaicius
+                {
+                    atimtis = sk;
+                }
+                else
+                {
+                    atimtis -= sk;
+                }
+            }
+
+            return atimtis;
+        }
+
+        private static double GautiSuma(List<double> skaiciai)
+        {
+            double suma = 0;
+            foreach (double sk in skaiciai)
+            {
+                suma += sk;
+            }
+
+            return suma;
         }
     }
 }

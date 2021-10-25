@@ -12,7 +12,7 @@ namespace _4uzduotis
         {
             WordDatabase zodziuLaikmena = new WordDatabase();
 
-            zodziuLaikmena.Ivedimas();
+            Ivedimas(zodziuLaikmena);
 
             Console.WriteLine();
 
@@ -22,5 +22,27 @@ namespace _4uzduotis
 
             Console.ReadKey();
         }
+
+        static void Ivedimas(WordDatabase wDB)
+        {
+            Console.WriteLine("Pradedamas ivedimas, pasikartojantys zodziai nebus issaugoti\nNorint baigti ivedima suvesti \"baigti\"");
+            string zodis = "";
+            while (zodis != "baigti")
+            {
+                Console.WriteLine("Iveskite zodi:");
+                zodis = Console.ReadLine();
+                if (wDB.ArEgzistuoja(zodis) && zodis != "baigti")
+                {
+                    Console.WriteLine($"Zodis \"{zodis}\" kartojasi ir nebus issaugotas");
+                }
+                else if (zodis != "baigti")
+                {
+                    wDB.Ivesti(zodis);
+                    Console.WriteLine($"\"{zodis}\" buvo issaugotas!");
+                }
+            }
+        }
+
+
     }
 }

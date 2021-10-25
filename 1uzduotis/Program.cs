@@ -12,7 +12,7 @@ namespace _1uzduotis
         {
             int amzius;
             amzius = Amzius();
-            Galimybes(amzius);
+            NustatytiGalimybes(amzius);
 
             Console.ReadKey();
         }
@@ -28,7 +28,10 @@ namespace _1uzduotis
                 try
                 {
                     amzius = Convert.ToInt32(Console.ReadLine());
-                    if (amzius < 0) throw new ArgumentOutOfRangeException("Amzius negali buti mazesnis nei 0");
+                    if (amzius < 0)
+                    {
+                        throw new ArgumentOutOfRangeException("Amzius negali buti mazesnis nei 0");
+                    }
                     tikrinimas = false;
                 }
             
@@ -39,7 +42,7 @@ namespace _1uzduotis
             }
             return amzius;
         }
-        static void Galimybes(int amzius)
+        static void NustatytiGalimybes(int amzius)
         {
             if (amzius < 18)
             {
