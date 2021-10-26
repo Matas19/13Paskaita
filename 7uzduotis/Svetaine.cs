@@ -28,22 +28,22 @@ namespace _7uzduotis
                 Console.WriteLine("Iveskite ka norite daryti:");
                 Console.WriteLine("prisijungti/registruotis/atsijungti");
                 pasirinkimas = Console.ReadLine().ToLower();
-                if(pasirinkimas == "prisijungti")
+                switch (pasirinkimas)
                 {
-                    Prisijungti();
+                    case "prisijungti":
+                        Prisijungti();
+                        break;
+                    case "registruotis":
+                        Registruotis();
+                        break;
+                    case "atsijungti":
+                        Console.WriteLine("Viso gero!");
+                        break;
+                    default:
+                        Console.WriteLine("Blogas pasirinkimas!!! Kartokite");
+                        break;
                 }
-                else if(pasirinkimas == "registruotis")
-                {
-                    Registruotis();
-                }
-                else if(pasirinkimas == "atsijungti")
-                {
-                    Console.WriteLine("Viso gero!");
-                }
-                else
-                {
-                    Console.WriteLine("Blogas pasirinkimas!!! Kartokite");
-                }
+
                 Console.WriteLine();
             }
         }
@@ -103,8 +103,6 @@ namespace _7uzduotis
                 password = Console.ReadLine();
 
                 bool egzistuoja = Duombaze.ArEgzistuojaFaile(username);    //jei userIndex -1, vadinasi tokio vartotojo nera
-                
-                
 
 
                 if (!egzistuoja)       //tikrina ar neegzistuoja vartotojas su pasirinktu username

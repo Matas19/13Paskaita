@@ -20,22 +20,26 @@ namespace _7uzduotis
 
         public bool ArEgzistuojaFaile(string name)
         {
-            string eilute = "";
-            using(StreamReader sr = File.OpenText(_path))
-            {
-                
-                while (eilute != null)  //sukasi kol nuskaityta eilute bus failo pabaiga
+            string eilute;
+            try { 
+                using(StreamReader sr = File.OpenText(_path))
                 {
-                    eilute = sr.ReadLine();
-                    if (eilute != null)         //tikrina ar nuskaityta eilute nera paskutine
+                
+                    while (!sr.EndOfStream)  //sukasi kol nuskaityta eilute bus failo pabaiga
                     {
+                        eilute = sr.ReadLine();
                         string[] duomenys = eilute.Split(' ');  //sukapoja string eilute i atskirus zodzius
                         if (duomenys[0] == name)
                         {
                             return true;
                         }
+
                     }
                 }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine($"Ivyko klaida: {e.Message}");
             }
 
             return false;
@@ -46,14 +50,14 @@ namespace _7uzduotis
         public bool TikrintiPasswordFaile(string name, string pasw)
         {
             string eilute = "";
-            using (StreamReader sr = File.OpenText(_path))
-            {
 
-                while (eilute != null)  //sukasi kol nenuskaito failo pabaigos
+            try { 
+                using (StreamReader sr = File.OpenText(_path))
                 {
-                    eilute = sr.ReadLine();
-                    if (eilute != null)         //tikrina ar nuskaityta eilute nera paskutine
+
+                    while (!sr.EndOfStream)  //sukasi kol nenuskaito failo pabaigos
                     {
+                        eilute = sr.ReadLine();
                         string[] duomenys = eilute.Split(' ');  //sukapoja string eilute i atskirus zodzius
                         if (duomenys[0] == name && duomenys[1] == pasw)     //patikrina ar username ir paswordas sutampa
                         {
@@ -62,16 +66,25 @@ namespace _7uzduotis
                     }
                 }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Ivyko klaida: {e.Message}");
+            }
 
             return false;
         }
 
         public void PridetiVartotoja(string name, string pasw)
         {
-            
-            using(StreamWriter sw = File.AppendText(_path))
+            try { 
+                using(StreamWriter sw = File.AppendText(_path))
+                {
+                    sw.WriteLine($"{name} {pasw}");
+                }
+            }
+            catch (Exception e)
             {
-                sw.WriteLine($"{name} {pasw}");
+                Console.WriteLine($"Ivyko klaida: {e.Message}");
             }
         }
     }
