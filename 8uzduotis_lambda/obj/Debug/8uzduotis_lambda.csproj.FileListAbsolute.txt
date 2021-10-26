@@ -1,6 +1,0 @@
-C:\Users\Matas\source\repos\13Paskaita\8uzduotis_lambda\obj\Debug\8uzduotis_lambda.csproj.CoreCompileInputs.cache
-C:\Users\Matas\source\repos\13Paskaita\8uzduotis_lambda\bin\Debug\8uzduotis_lambda.exe.config
-C:\Users\Matas\source\repos\13Paskaita\8uzduotis_lambda\bin\Debug\8uzduotis_lambda.exe
-C:\Users\Matas\source\repos\13Paskaita\8uzduotis_lambda\bin\Debug\8uzduotis_lambda.pdb
-C:\Users\Matas\source\repos\13Paskaita\8uzduotis_lambda\obj\Debug\8uzduotis_lambda.exe
-C:\Users\Matas\source\repos\13Paskaita\8uzduotis_lambda\obj\Debug\8uzduotis_lambda.pdb

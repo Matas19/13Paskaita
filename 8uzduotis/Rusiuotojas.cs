@@ -30,8 +30,8 @@ namespace _8uzduotis
 
         public void IsvetiRusiuota()
         {
-            RastiKursaIrKieki(_DestPath, out _DestKiekis);
-            RastiKursaIrKieki(_StudPath, out _StudKiekis);
+            _DestKiekis = RastiKursaIrKieki(_DestPath);
+            _StudKiekis = RastiKursaIrKieki(_StudPath);
 
             for (int i = 1; i<=_Kursai; i++)
             {
@@ -45,13 +45,6 @@ namespace _8uzduotis
             Console.WriteLine($"Kursu kiekis: {_Kursai}\nStudentu kiekis: {_StudKiekis}\nDestytoju kiekis: {_DestKiekis}");
         }
 
-        //private void KursuKiekisIrSkaiciai()   //suranda kiek yra kursu ir suskaiciuo studentus bei destytojus
-        //{
-        //    RastiKursaIrKieki(_DestPath, out _DestKiekis);
-        //    RastiKursaIrKieki(_StudPath, out _StudKiekis);
-
-
-        //}
         private void IsvestiPagalKursa(int kursas, string path)
         {
             string duomenys;
@@ -79,21 +72,20 @@ namespace _8uzduotis
             }
         }
 
-        private void RastiKursaIrKieki(string path,  out int kiekis)
+        private int RastiKursaIrKieki(string path)
         {
             
-            kiekis = 0;
+            int kiekis = 0;
             string duomenys;
             string[] duomMasyvas;
             try
             {
-
                 using (StreamReader sr = new StreamReader(path))
                 {
                     duomenys = sr.ReadLine();
                     while (duomenys != null) //sukasi kol nuskaitoma paskutine
                     {
-                        kiekis++;  //skaiciuoja asmenis
+                        kiekis++;  //skaiciuoja asmenis kurse
                         
                         if (duomenys != null)   //patikrina ar nuskaityta eilute netuscia
                         {
@@ -103,19 +95,16 @@ namespace _8uzduotis
                             {
                                 _Kursai = Convert.ToInt32(duomMasyvas[2]);
                             }
-
                         }
                         duomenys = sr.ReadLine();
                     }
-
                 }
-
-                
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Ivyko klaida: {e.Message}");
             }
+            return kiekis;
         }
     }
 }
