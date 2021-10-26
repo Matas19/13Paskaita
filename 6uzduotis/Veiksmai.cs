@@ -9,14 +9,20 @@ namespace _6uzduotis
 {
     static class Veiksmai
     {
-
-        public static string TikrintiFaila(string path)
+        public static string TikrintiFaila(string irasas, string path, string errPath)
         {
             try                             //ivykus klaidai, gautas exceptionas bus issaugomas i faila
             {
                 if (File.Exists(path))
                 {
-                    return "taip";
+                    using(StreamReader sr = new StreamReader(path))
+                    {
+                        string duom = sr.ReadToEnd();
+                        if (duom.Contains(irasas))
+                        {
+                            return "taip";
+                        }
+                    }
                 }
                 else
                 {
@@ -25,16 +31,12 @@ namespace _6uzduotis
             }
             catch(Exception e)
             {
-                Console.WriteLine($"Ivyko klaida: {e.Message}");
-                using (StreamWriter sw = File.AppendText("../../error.txt"))        //sukuria nauja faila arba atidaro streamWriteri kuris prides teksta prie jau egzistuojancio failo
-                {
-                    sw.WriteLine($"ivyko klaida\n{e}");
-                }
+                IrasytiKlaida(e, errPath);
             }
             return "ne";
         }
 
-        public static void Ivesti(string path, string duomenys)
+        public static void Ivesti(string path, string duomenys, string errPath)
         {
             try                       //ivykus klaidai, gautas exceptionas bus issaugomas i faila
             {
@@ -46,12 +48,19 @@ namespace _6uzduotis
             }
             catch(Exception e)
             {
-                Console.WriteLine($"Ivyko klaida: {e.Message}");
-                using (StreamWriter sw = File.AppendText("../../error.txt"))    //sukuria nauja faila arba atidaro streamWriteri kuris prides teksta prie jau egzistuojancio failo
-                {
-                    sw.WriteLine($"ivyko klaida\n{e}");
-                }
+                IrasytiKlaida(e, errPath);
+            }
+        }
+
+        private static void IrasytiKlaida(Exception e, string errPath)
+        {
+            Console.WriteLine($"Ivyko klaida {e.Message}");
+            using(StreamWriter sw = File.AppendText(errPath))
+            {
+                sw.WriteLine($"Ivyko klaida: {e}");
             }
         }
     }
+
+
 }

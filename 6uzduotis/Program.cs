@@ -11,11 +11,16 @@ namespace _6uzduotis
         static void Main(string[] args)
         {
             string path = "../../text.txt";
+            string errPath = "../../errLog.txt";
 
-            Veiksmai.TikrintiFaila(path);
+            string irasas = "test";
+
+            Console.WriteLine($"Ar irasas \"{irasas}\" egzistuoja faile? ");
+            Console.WriteLine(Veiksmai.TikrintiFaila(irasas, path, errPath));
+            
 
             string test = "testinis tekstas";
-            Veiksmai.Ivesti(path, test);
+            Veiksmai.Ivesti(path, test, errPath);
 
             Console.ReadKey();
         }
