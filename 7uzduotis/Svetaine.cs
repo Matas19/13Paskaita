@@ -11,10 +11,13 @@ namespace _7uzduotis
         public string Pavadinimas {get;}
         public UserDatabase Duombaze { get; }
 
+        private bool _Prisijunges;
+
         public Svetaine(string pav)
         {
             Pavadinimas = pav;
             Duombaze = new UserDatabase();
+            _Prisijunges = false;
         }
 
         public void PradetiDarba()
@@ -23,25 +26,34 @@ namespace _7uzduotis
             
 
             string pasirinkimas = "";
-            while (pasirinkimas != "atsijungti")
+            while (pasirinkimas != "isjungti")
             {
-                Console.WriteLine("Iveskite ka norite daryti:");
-                Console.WriteLine("prisijungti/registruotis/atsijungti");
-                pasirinkimas = Console.ReadLine().ToLower();
-                switch (pasirinkimas)
+                //Console.WriteLine("Iveskite ka norite daryti:");
+                //Console.WriteLine("prisijungti/registruotis/atsijungti");
+                //pasirinkimas = Console.ReadLine().ToLower();
+                //switch (pasirinkimas)
+                //{
+                //    case "prisijungti":
+                //        Prisijungti();
+                //        break;
+                //    case "registruotis":
+                //        Registruotis();
+                //        break;
+                //    case "atsijungti":
+                //        Console.WriteLine("Viso gero!");
+                //        break;
+                //    default:
+                //        Console.WriteLine("Blogas pasirinkimas!!! Kartokite");
+                //        break;
+                //}
+                
+                if (_Prisijunges == false)
                 {
-                    case "prisijungti":
-                        Prisijungti();
-                        break;
-                    case "registruotis":
-                        Registruotis();
-                        break;
-                    case "atsijungti":
-                        Console.WriteLine("Viso gero!");
-                        break;
-                    default:
-                        Console.WriteLine("Blogas pasirinkimas!!! Kartokite");
-                        break;
+                    pasirinkimas = GuestFront();
+                }
+                else
+                {
+                    pasirinkimas = UserFront();
                 }
 
                 Console.WriteLine();
@@ -138,6 +150,53 @@ namespace _7uzduotis
                 Console.WriteLine("Ivestas blogas pasirinkimas! Bandykite is naujo!");
             }
 
+        }
+
+        private string GuestFront()    //pasirinkimo meniu neprisijungusiam vartotojui
+        {
+            string pasirinkimas;
+            Console.WriteLine("Iveskite ka norite daryti:");
+            Console.WriteLine("prisijungti/registruotis/isjungti");
+            pasirinkimas = Console.ReadLine().ToLower();
+            switch (pasirinkimas)
+            {
+                case "prisijungti":
+                    Prisijungti();
+                    _Prisijunges = true;
+                    break;
+                case "registruotis":
+                    Registruotis();
+                    break;
+                case "isjungti":
+                    Console.WriteLine("Viso gero!");
+                    break;
+                default:
+                    Console.WriteLine("Blogas pasirinkimas!!! Kartokite");
+                    break;
+            }
+
+            return pasirinkimas;
+        }
+
+        private string UserFront()    //pasirinkimo meniu prisijungusiam vartotojiui
+        {
+            string pasirinkimas;
+            Console.WriteLine("Iveskite ka norite daryti:");
+            Console.WriteLine("atsijungti/isjungti");
+            pasirinkimas = Console.ReadLine().ToLower();
+            switch (pasirinkimas)
+            {
+                case "atsijungtis":
+                    _Prisijunges = false;
+                    break;
+                case "isjungti":
+                    Console.WriteLine("Viso gero");
+                    break;
+                default:
+                    Console.WriteLine("Blogas pasirinkimas!!! Kartokite");
+                    break;
+            }
+            return pasirinkimas;
         }
     }
 }
