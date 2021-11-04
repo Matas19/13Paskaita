@@ -15,7 +15,7 @@ namespace _8uzduotis_lambda
 
             Rusiuotojas sort = new Rusiuotojas(studentuFailas, destytojuFailas);
 
-            sort.IsvetiRusiuota();
+            sort.PradetiDarba();
 
 
 

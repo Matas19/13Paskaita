@@ -11,85 +11,79 @@ namespace _8uzduotis_lambda
     {
         private string _StudPath;
         private string _DestPath;
-        private int _StudKiekis;
-        private int _DestKiekis;
-        public int _Kursai { get; private set; }
-        public List<string[]> studentai { get; private set; }
-        public List<string[]> destytojai { get; private set; }
+        public AsmenuSarasas Studentai { get; private set; }
+        public AsmenuSarasas Destytojai { get; private set; }
+        private List<int> _Kursai;
 
         public Rusiuotojas(string stud, string dest)
         {
-            _Kursai = 0;
             _StudPath = stud;
             _DestPath = dest;
-            _StudKiekis = 0;
-            _DestKiekis = 0;
-            studentai = new List<string[]>();
-            destytojai = new List<string[]>();
+            Studentai = new AsmenuSarasas("Studentai");
+            Destytojai = new AsmenuSarasas("Destytojai");
         }
 
 
 
-        public void IsvetiRusiuota()
+        public void PradetiDarba()
         {
-            RastiKursaIrKieki(_DestPath, out _DestKiekis, destytojai);
-            RastiKursaIrKieki(_StudPath, out _StudKiekis, studentai);
-
-            for (int i = 1; i <= _Kursai; i++)
-            {
-                Console.WriteLine($"Kursas: {i}");
-                Console.WriteLine("Destytojai: ");
-                IsvestiPagalKursa(i, destytojai);
-                Console.WriteLine("Studentai: ");
-                IsvestiPagalKursa(i, studentai);
-            }
+            SkaitytiFaila(_DestPath, Destytojai);
+            SkaitytiFaila(_StudPath, Studentai);
+            Isvedimas();
             Console.WriteLine();
-            Console.WriteLine($"Kursu kiekis: {_Kursai}\nStudentu kiekis: {_StudKiekis}\nDestytoju kiekis: {_DestKiekis}");
+            Console.WriteLine($"Kursu kiekis: {_Kursai.Count}\nStudentu kiekis: {Studentai.Kiekis()}\nDestytoju kiekis: {Destytojai.Kiekis()}");
         }
 
-
-        private void IsvestiPagalKursa(int kursas, List<string[]> listas)
+        private void Isvedimas()
         {
-            var atrinkti = listas.FindAll(s => s[2] == kursas.ToString());
-            foreach (var asmuo in atrinkti)
+            RastiKursus();  //sujungia turimus studentu ir destytoju kursus
+            foreach(int item in _Kursai)
             {
-                Console.WriteLine($"{asmuo[0]} {asmuo[1]}");
+                Console.WriteLine($"Kursas: {item}");
+                IsvestiPagalKursa(item, Destytojai);
+                IsvestiPagalKursa(item, Studentai);
             }
         }
 
-        private void RastiKursaIrKieki(string path, out int kiekis, List<string[]> listas)
+        private void RastiKursus()
+        {
+            _Kursai = Studentai.Kursai.Union(Destytojai.Kursai).ToList();
+        }
+        private void IsvestiPagalKursa(int kursas, AsmenuSarasas sarasas)
+        {
+            var atrinkti = sarasas.Asmenys.FindAll(s => s.Kursas == kursas);    //suranda visus asmenis atitinkancius kursa
+            if(atrinkti.Count != 0)     //jei rastu asmenu sarasas ne tuscias tesia darba
+            {
+                Console.WriteLine($"{sarasas.Pavadinimas}:");
+                foreach (var asmuo in atrinkti)
+                {
+                    Console.WriteLine($"{asmuo.Vardas} {asmuo.Pavarde}");
+                }
+            }
+            
+        } 
+
+        private void SkaitytiFaila(string path, AsmenuSarasas sarasas)
         {
 
-            kiekis = 0;
             string duomenys;
+            StudijuAsmuo asmuo; //laikinas kintamasis
             string[] duomMasyvas;
             try
             {
 
                 using (StreamReader sr = new StreamReader(path))
-                {
-                    duomenys = sr.ReadLine();
-                    while (duomenys != null) //sukasi kol nuskaitoma paskutine
+                {                                  
+                    while (!sr.EndOfStream) //sukasi kol nuskaitoma paskutine
                     {
-                        kiekis++;  //skaiciuoja asmenis
-
-                        if (duomenys != null)   //patikrina ar nuskaityta eilute netuscia
-                        {
-                            duomMasyvas = duomenys.Split(' '); //Gauta duomenu eiluta isskaidoma i atskirus elementus kuriuos skire tarpas
-
-                            if (_Kursai < Convert.ToInt32(duomMasyvas[2])) //iesko didesnio kurso nei yra issaugotas, jei randa, tai buna naujas kursu kiekis
-                            {
-                                _Kursai = Convert.ToInt32(duomMasyvas[2]);
-                            }
-                            listas.Add(duomMasyvas);
-
-                        }
                         duomenys = sr.ReadLine();
+                        duomMasyvas = duomenys.Split(' '); //Gauta duomenu eiluta isskaidoma i atskirus elementus kuriuos skire tarpas
+                        asmuo = new StudijuAsmuo(duomMasyvas[0], duomMasyvas[1], Convert.ToInt32(duomMasyvas[2]));
+
+
+                        sarasas.Prideti(asmuo);
                     }
-
                 }
-
-
             }
             catch (Exception e)
             {
